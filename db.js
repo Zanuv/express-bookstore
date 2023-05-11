@@ -3,12 +3,16 @@
 const { Client } = require("pg");
 const { DB_URI } = require("./config");
 
-const db = new Client({
+console.log(process.env.DATABASE_PASSWORD);
+
+/* const db = new Client({
 	connectionString: DB_URI,
-	ssl: {
-		rejectUnauthorized: false,
-	},
 	password: process.env.DATABASE_PASSWORD,
+}); */
+
+let db = new Client({
+	host: "/var/run/postgresql/",
+	database: "books",
 });
 
 db.connect();
