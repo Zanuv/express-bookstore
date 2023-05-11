@@ -1,14 +1,14 @@
 /** Database config for database. */
 
-require("dotenv").config();
 const { Client } = require("pg");
-const { DB_URI, DB_PASSWORD } = require("./config");
+const { DB_URI } = require("./config");
 
-console.log(DB_PASSWORD);
-
-let db = new Client({
+const db = new Client({
 	connectionString: DB_URI,
-	password: DB_PASSWORD,
+	ssl: {
+		rejectUnauthorized: false,
+	},
+	password: process.env.DATABASE_PASSWORD,
 });
 
 db.connect();
